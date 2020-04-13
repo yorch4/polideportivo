@@ -40,6 +40,10 @@ class HomeController extends Controller
         return view('main.articles', array('articles' => $articles));
     }
 
+    public function subscribe() {
+        return view('main.subscribe');
+    }
+
     public function profile() {
         $user = Auth::user();
         return view('main.profile', array('user' => $user));

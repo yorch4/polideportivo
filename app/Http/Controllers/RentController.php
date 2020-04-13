@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Field;
 use App\Rent;
 use App\Section;
+use App\User;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RentController extends Controller
 {
@@ -34,6 +37,11 @@ class RentController extends Controller
         $day = $request->input('day');
         $section = $request->input('section');
         $user_id = $request->input('user_id');
+        $data = array(
+            'email_address'=>'jorge.rg0074@gmail.com',
+            'cc'=>null,
+            'subject'=>'Datos reserva',
+        );
 
         if($request->input('id') != null) {
             if(Rent::where('field_id', $field_id)->where('day', $day)->where('section', $section)->count() <= 0) {
@@ -43,7 +51,30 @@ class RentController extends Controller
                 $rent->section = $section;
                 $rent->user_id = $user_id;
                 $rent->save();
-                return view('rent.thanks');
+                $user = User::find($user_id);
+                $field = Field::find($field_id);
+
+                $pdfData = array(
+                    'user'=> $user->name." ".$user->last_name,
+                    'price'=> '0',
+                    'day' => $day,
+                    'section' => $section,
+                    'field'=>$field->game." Campo ".$field->field_number,
+                );
+                $pdf = app('dompdf.wrapper');
+                $pdf->loadview('mails.pdf', $pdfData);
+                Mail::send('mails.addMail', $data, function($message) use($data, $pdf) {
+                    $message->from('jorge.rgdaw@gmail.com', 'Polideportivo');
+                    $message->to($data['email_address']);
+                    if($data['cc'] != null){
+                        $message->cc($data['cc']);
+                    }
+                    $message->subject($data['subject']);
+                    $message->attachData($pdf->output(), 'reserva.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
+                });
+                return redirect('/control/alquileres');
             } else {
                 return view('rent.error', array('error' => 'La pista acaba de ser reservada en esa hora'));
             }
@@ -55,7 +86,55 @@ class RentController extends Controller
                 $rent->section = $section;
                 $rent->user_id = $user_id;
                 $rent->save();
-                return view('rent.thanks');
+                $user = User::find($user_id);
+                $field = Field::find($field_id);
+
+                if($user_id == Auth::user()->id) {
+                    $pdfData = array(
+                        'user'=> $user->name." ".$user->last_name,
+                        'price'=> $field->price,
+                        'day' => $day,
+                        'section' => $section,
+                        'field'=>$field->game." Campo ".$field->field_number,
+                    );
+                    $pdf = app('dompdf.wrapper');
+                    $pdf->loadview('mails.pdf', $pdfData);
+                    Mail::send('mails.mail', $data, function($message) use($data, $pdf) {
+                        $message->from('jorge.rgdaw@gmail.com', 'Polideportivo');
+                        $message->to($data['email_address']);
+                        if($data['cc'] != null){
+                            $message->cc($data['cc']);
+                        }
+                        $message->subject($data['subject']);
+                        $message->attachData($pdf->output(), 'reserva.pdf', [
+                            'mime' => 'application/pdf',
+                        ]);
+                    });
+                    return view('rent.thanks');
+                } else {
+                    $pdfData = array(
+                        'user'=> $user->name." ".$user->last_name,
+                        'price'=> '0',
+                        'day' => $day,
+                        'section' => $section,
+                        'field'=>$field->game." Campo ".$field->field_number,
+                    );
+                    $pdf = app('dompdf.wrapper');
+                    $pdf->loadview('mails.pdf', $pdfData);
+                    Mail::send('mails.addMail', $data, function($message) use($data, $pdf) {
+                        $message->from('jorge.rgdaw@gmail.com', 'Polideportivo');
+                        $message->to($data['email_address']);
+                        if($data['cc'] != null){
+                            $message->cc($data['cc']);
+                        }
+                        $message->subject($data['subject']);
+                        $message->attachData($pdf->output(), 'reserva.pdf', [
+                            'mime' => 'application/pdf',
+                        ]);
+                    });
+                    return redirect('/control/alquileres');
+                }
+
             } else {
                 return view('rent.error', array('error' => 'La pista acaba de ser reservada en esa hora'));
             }

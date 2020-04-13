@@ -1,3 +1,8 @@
+<div class="cookie-alert">
+    <span class="message">Esta página usa cookies para ofrecerte una mejor experiencia. Al usarla estarás aceptando los <a href="http://www.interior.gob.es/politica-de-cookies" target="_blank">términos</a></span>
+    <span class="mobile">Esta página usa cookies, <a href="http://www.interior.gob.es/politica-de-cookies" target="_blank">aprende más</a></span>
+    <label for="checkbox-cb" class="close-cb accept-cookies">x</label>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -74,3 +79,5 @@
       </span>
     </div>
 </nav>
+<script src="{{url('js/cookie-alert.js')}}"></script>
+

@@ -174,7 +174,7 @@ class AdminController extends Controller
     }
 
     public function rents() {
-        return view('control.rents.rents', array('rents' => Rent::all()));
+        return view('control.rents.rents', array('rents' => Rent::orderBy('id', 'DESC')->get()));
     }
     public function addRent() {
         return view('control.rents.addRent', array('fields' => Field::all()));

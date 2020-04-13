@@ -16,6 +16,7 @@ Route::get('/index', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/instalaciones/{name}', 'HomeController@facilities');
 Route::get('noticias', 'HomeController@articles');
+Route::get('abonate', 'HomeController@subscribe');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');
