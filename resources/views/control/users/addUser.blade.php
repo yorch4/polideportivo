@@ -6,10 +6,10 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
-                @if(isset($error))
+                @if($errors->any())
                     <div class="row mb-4">
                         <div class="col">
-                            <span class="text-danger">*{{$error}}</span>
+                            <span class="text-danger">*{{$errors->first()}}</span>
                         </div>
                     </div>
                 @endif
@@ -43,7 +43,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="img">Imagen de Perfil</label>
-                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}" required>
+                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}">
                             @error('img')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

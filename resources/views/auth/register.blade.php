@@ -37,7 +37,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="img">Imagen de Perfil</label>
-                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}" required>
+                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}">
                             @error('img')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

@@ -6,10 +6,10 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
-                @if(isset($error))
+                @if($errors->any())
                     <div class="row mb-4">
                         <div class="col">
-                            <span class="text-danger">*{{$error}}</span>
+                            <span class="text-danger">*{{$errors->first()}}</span>
                         </div>
                     </div>
                 @endif

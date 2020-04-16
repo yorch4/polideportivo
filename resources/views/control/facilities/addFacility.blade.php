@@ -6,10 +6,10 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
-                @if(isset($error))
+                @if($errors->any())
                     <div class="row mb-4">
                         <div class="col">
-                            <span class="text-danger">*{{$error}}</span>
+                            <span class="text-danger">*{{$errors->first()}}</span>
                         </div>
                     </div>
                 @endif
@@ -56,7 +56,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="normal_price">Precio normal</label>
-                            <input id="normal_price" type="number" step="0.01" min="0" class="form-control @error('normal_price') is-invalid @enderror" name="normal_price" required autocomplete="normal_price">
+                            <input id="normal_price" type="number" step="0.01" min="0" value="{{ old('normal_price') }}" class="form-control @error('normal_price') is-invalid @enderror" name="normal_price" required autocomplete="normal_price">
                             @error('normal_price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="sub_price">Precio de abonado</label>
-                            <input id="sub_price" type="number" step="0.01" min="0" class="form-control @error('sub_price') is-invalid @enderror" name="sub_price" required autocomplete="sub_price">
+                            <input id="sub_price" type="number" step="0.01" min="0" value="{{ old('sub_price') }}" class="form-control @error('sub_price') is-invalid @enderror" name="sub_price" required autocomplete="sub_price">
                             @error('sub_price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

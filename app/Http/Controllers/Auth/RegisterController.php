@@ -65,10 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $fich_unic = time() . "-" . $data['img']->getClientOriginalName();
-        //para que no se repita el nombre del fichero se concatena el tiempo unix
-        $imgFestival = "img/users/" . $fich_unic;
-        move_uploaded_file($data['img'], $imgFestival);
+        if(isset($data['img'])) {
+            $fich_unic = time() . "-" . $data['img']->getClientOriginalName();
+            //para que no se repita el nombre del fichero se concatena el tiempo unix
+            $imgFestival = "img/users/" . $fich_unic;
+            move_uploaded_file($data['img'], $imgFestival);
+        } else {
+            $imgFestival = "img/users/user.png";
+        }
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],

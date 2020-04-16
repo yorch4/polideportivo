@@ -24,12 +24,16 @@ class AdminController extends Controller
     public function postAddUser(Request $request) {
         $error = DB::table('users')->where('email', '=', $request->input('email'))->get();
         if(count($error) > 0) {
-            return view('control.users.addUser', array('error' => "El email ya existe"));
+            return redirect()->back()->withInput()->withErrors('El email ya existe.');
         }
-        $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
-        //para que no se repita el nombre del fichero se concatena el tiempo unix
-        $img = "img/users/" . $fich_unic;
-        move_uploaded_file($request->file('img'), $img);
+        if($request->file('img') != null) {
+            $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
+            //para que no se repita el nombre del fichero se concatena el tiempo unix
+            $img = "img/users/" . $fich_unic;
+            move_uploaded_file($request->file('img'), $img);
+        } else {
+         $img = "img/users/user.png";
+        }
         User::create(array('name' => $request->input('name'), 'last_name' => $request->input('last_name'), 'email' => $request->input('email'), 'password' => Hash::make($request->input('password')), 'role' => $request->input('role'), 'img' => base64_encode($img)));
         return redirect('/control/usuarios');
     }
@@ -72,7 +76,7 @@ class AdminController extends Controller
     }
     public function postAddField(Request $request) {
         if(count(DB::table('fields')->where('game', '=', $request->input('game'))->where('field_number', '=', $request->input('field_number'))->get()) > 0) {
-            return view('control.fields.addField', array('error' => "El número de campo de ese juego ya existe"));
+            return redirect()->back()->withInput()->withErrors('El número de campo de ese juego ya existe.');
         }
         $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
         //para que no se repita el nombre del fichero se concatena el tiempo unix
@@ -140,7 +144,7 @@ class AdminController extends Controller
     public function postAddFacility(Request $request) {
         $error = DB::table('facilities')->where('name', '=', $request->input('name'))->get();
         if(count($error) > 0) {
-            return view('control.facilities.addFacility', array('error' => "El nombre de la instalación ya existe"));
+            return redirect()->back()->withInput()->withErrors('El nombre de la instalación ya existe.');
         }
         $facility = new Facilitie();
         $facility->name = $request->input('name');
@@ -181,7 +185,7 @@ class AdminController extends Controller
     }
     public function postAddRent(Request $request) {
         if(count(DB::table('users')->where('email', '=', $request->input('email'))->get()) <= 0) {
-            return Redirect::back()->withErrors(['Ese email no existe']);
+            return redirect()->back()->withInput()->withErrors('Ese email no existe.');
         } else {
             $user = DB::table('users')->where('email', $request->input('email'))->first();
             $user_id = $user->id;
@@ -248,7 +252,7 @@ class AdminController extends Controller
     public function postAddArticle(Request $request) {
         $error = DB::table('articles')->where('headline', '=', $request->input('headline'))->get();
         if(count($error) > 0) {
-            return view('control.articles.addArticle', array('error' => "El titular de la noticia ya existe"));
+            return redirect()->back()->withInput()->withErrors('El titular de la noticia ya existe.');
         }
         $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
         //para que no se repita el nombre del fichero se concatena el tiempo unix
@@ -270,17 +274,21 @@ class AdminController extends Controller
     }
     public function postUpdateArticle($id , Request $request) {
         $article = Article::find($id);
-        if($request->file('img') != NULL) {
-            $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
-            //para que no se repita el nombre del fichero se concatena el tiempo unix
-            $img = "img/news/" . $fich_unic;
-            move_uploaded_file($request->file('img'), $img);
-            $article->img = base64_encode($img);
+        if(count(DB::table('articles')->where('headline', '=', $request->input('headline'))->where('id', '!=', $id)->get()) > 0) {
+            return Redirect::back()->withErrors(['Ese titular ya existe']);
+        } else {
+            if($request->file('img') != NULL) {
+                $fich_unic = time() . "-" . $request->file('img')->getClientOriginalName();
+                //para que no se repita el nombre del fichero se concatena el tiempo unix
+                $img = "img/news/" . $fich_unic;
+                move_uploaded_file($request->file('img'), $img);
+                $article->img = base64_encode($img);
+            }
+            $article->headline = $request->input('headline');
+            $article->body = $request->input('body');
+            $article->created_at = $request->input('created_at');
+            $article->save();
+            return redirect('/control/noticias');
         }
-        $article->headline = $request->input('headline');
-        $article->body = $request->input('body');
-        $article->created_at = $request->input('created_at');
-        $article->save();
-        return redirect('/control/noticias');
     }
 }

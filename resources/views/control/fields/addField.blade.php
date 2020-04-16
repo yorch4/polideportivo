@@ -6,10 +6,10 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
-                @if(isset($error))
+                @if($errors->any())
                     <div class="row mb-4">
                         <div class="col">
-                            <span class="text-danger">*{{$error}}</span>
+                            <span class="text-danger">*{{$errors->first()}}</span>
                         </div>
                     </div>
                 @endif
@@ -43,7 +43,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="price">Precio</label>
-                            <input id="price" type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" name="price" required autocomplete="price">
+                            <input id="price" type="number" step="0.01" min="0" value="{{ old('price') }}" class="form-control @error('price') is-invalid @enderror" name="price" required autocomplete="price">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

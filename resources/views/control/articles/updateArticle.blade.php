@@ -5,6 +5,13 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="">
                 @csrf
+                @if($errors->any())
+                    <div class="row mb-4">
+                        <div class="col">
+                            <span class="text-danger">*{{$errors->first()}}</span>
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col text-center mb-3">
                         <?php $img = base64_decode($article->img) ?>
@@ -60,7 +67,7 @@
                     </div>
                 </div>
                 <div class="form-group text-center mt-5 mb-3">
-                    <a class="btn btn-secundary" href="{{url('/control/usuarios')}}">Cancelar</a>
+                    <a class="btn btn-secundary" href="{{url('/control/noticias')}}">Cancelar</a>
                     <button type="submit" class="btn btn-primary">
                         Modificar
                     </button>
