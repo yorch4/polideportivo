@@ -43,12 +43,10 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="img">Imagen</label>
-                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}" required>
-                            @error('img')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                            @enderror
+                            <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}">
+                            <span id="error" class="invalid-feedback" role="alert" style="display: none">
+                                <strong>Tipo de imagen inválido</strong>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -60,4 +58,5 @@
             </form>
         </div>
     </div>
+    <script src="{{url('js/validate-img.js')}}"></script>
 @endsection

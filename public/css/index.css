@@ -266,6 +266,7 @@ FIN DE CARD FLIP
     top: 0;
     cursor: pointer;
     border-radius: 3px;
+    border-radius: 3px;
     box-shadow: inset 0 0 3px 0 rgba(0,0,0,0.2);
     line-height: 30px;
     height: 30px;
@@ -282,5 +283,26 @@ FIN DE CARD FLIP
     transition-delay: 1000ms;
 }
 
-
+.page-link {
+    color: rgba(43, 41, 43, 0.88) !important;
+    background-color: #12650c !important;
+    height: 100% !important;
+}
+.page-link:hover {
+    color: rgba(43, 41, 43, 0.88) !important;
+    background-color: #1d508a !important;
+}
+.disabled .page-link {
+    color: rgba(29, 29, 29, 0.33) !important;
+    background-color: rgba(0,0,0,0.21) !important;
+    height: 100% !important;
+}
+.active .page-link {
+    color: black !important;
+    background-color: #8a1d50 !important;
+    height: 100% !important;
+    border: none;
+    margin-top: 1px !important;
+    padding-bottom: 1px !important;
+}
 

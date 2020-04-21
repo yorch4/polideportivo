@@ -40,4 +40,15 @@ class User extends Authenticatable
     public function rents() {
         return $this->hasMany(Rent::class);
     }
+
+    public function scopeLastname($query, $last_name) {
+        if($last_name) {
+            return $query->where('last_name', 'like', "%$last_name%");
+        }
+    }
+    public function scopeEmail($query, $email) {
+        if($email) {
+            return $query->where('email', 'like', "%$email%");
+        }
+    }
 }

@@ -12,4 +12,10 @@ class Field extends Model
     public function sections() {
         return $this->hasMany(Section::class);
     }
+
+    public function scopeGame($query, $game) {
+        if($game) {
+            return $query->where('game', 'like', "%$game%");
+        }
+    }
 }

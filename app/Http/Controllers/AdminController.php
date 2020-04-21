@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
-    public function users() {
-        return view('control.users.users', array('users' => User::all()));
+    public function users(Request $request) {
+        $users = User::lastname($request->get('apellidos'))->email($request->get('email'))->paginate(5);
+
+        return view('control.users.users', array('users' => $users));
     }
     public function addUser() {
         return view('control.users.addUser');
@@ -68,8 +70,9 @@ class AdminController extends Controller
         return redirect('/control/usuarios');
     }
 
-    public function fields() {
-        return view('control.fields.fields', array('fields' => Field::all()));
+    public function fields(Request $request) {
+        $fields = Field::game($request->get('juego'))->get();
+        return view('control.fields.fields', array('fields' => $fields));
     }
     public function addField() {
         return view('control.fields.addField');
@@ -135,8 +138,9 @@ class AdminController extends Controller
         }
     }
 
-    public function facilities() {
-        return view('control.facilities.facilities', array('facilities' => Facilitie::all()));
+    public function facilities(Request $request) {
+        $facilities = Facilitie::name($request->get('nombre'))->get();
+        return view('control.facilities.facilities', array('facilities' => $facilities));
     }
     public function addFacility() {
         return view('control.facilities.addFacility');
@@ -177,8 +181,9 @@ class AdminController extends Controller
         }
     }
 
-    public function rents() {
-        return view('control.rents.rents', array('rents' => Rent::orderBy('id', 'DESC')->get()));
+    public function rents(Request $request) {
+        $rents = Rent::day($request->get('fecha'))->email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(5);
+        return view('control.rents.rents', array('rents' => $rents));
     }
     public function addRent() {
         return view('control.rents.addRent', array('fields' => Field::all()));
@@ -243,8 +248,9 @@ class AdminController extends Controller
         }
     }
 
-    public function articles() {
-        return view('control.articles.articles', array('articles' => Article::all()));
+    public function articles(Request $request) {
+        $articles = Article::headline($request->get('titular'))->paginate(5);
+        return view('control.articles.articles', array('articles' => $articles));
     }
     public function addArticle() {
         return view('control.articles.addArticle');

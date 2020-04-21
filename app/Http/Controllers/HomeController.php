@@ -35,8 +35,8 @@ class HomeController extends Controller
         return view('main.facilities', array('facilitie' => $facilitie));
     }
 
-    public function articles() {
-        $articles = Article::orderBy('created_at', 'desc')->get();
+    public function articles(Request $request) {
+        $articles = Article::headline($request->get('titular'))->orderBy('created_at', 'desc')->paginate(5);
         return view('main.articles', array('articles' => $articles));
     }
 

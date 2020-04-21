@@ -17,11 +17,9 @@
                                 </label>
                                 <p id="pOculto" class="mb-0 text-success" style="visibility: hidden; font-size: 1rem;"><i class="far fa-check-circle"> Archivo cargado con éxito</i></p>
                                 <input id="img" type="file" accept="image/*" class="form-control @error('img') is-invalid @enderror" name="img">
-                                @error('img')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <span id="error" class="invalid-feedback" role="alert" style="display: none">
+                                <strong>Tipo de imagen inválido</strong>
+                            </span>
                             </div>
                     </div>
                 </div>
@@ -92,11 +90,5 @@
             </form>
         </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            $('input[type="file"]').change(function(e){
-                $('#pOculto').css('visibility', 'visible');
-            });
-        });
-    </script>
+    <script src="{{url('js/validate-modify-img.js')}}"></script>
 @endsection

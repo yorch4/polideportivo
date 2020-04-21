@@ -1,5 +1,15 @@
 @extends('layouts.master')
 @section('content')
+    <nav class="navbar navbar-light mt-3">
+        <div class="w-100">
+            <form class="form-inline float-right">
+                <input name="email" class="form-control mr-sm-2" placeholder="Filtrar por email" type="search" aria-label="Search by Email">
+                <input name="juego" class="form-control mr-sm-2" placeholder="Filtrar por juego" type="search" aria-label="Search by Game">
+                <input name="fecha" class="form-control mr-sm-2" type="date" aria-label="Search by Date">
+                <button class="btn btn-secundary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
     <div class="container mt-5">
         <div class="row mb-2">
             <div class="col-md-2"></div>
@@ -41,5 +51,10 @@
                 <div class="col-md-2"></div>
             </div>
         @endforeach
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                {{$rents->links()}}
+            </div>
+        </div>
     </div>
 @endsection

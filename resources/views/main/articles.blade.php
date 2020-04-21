@@ -1,5 +1,13 @@
 @extends('layouts.master')
 @section('content')
+    <nav class="navbar navbar-light mt-3">
+        <div class="w-100">
+            <form class="form-inline float-right">
+                <input name="titular" class="form-control mr-sm-2" type="search" placeholder="Filtrar por titular" aria-label="Search">
+                <button class="btn btn-secundary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
@@ -36,5 +44,10 @@
             @endforeach
         </div>
         <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            {{$articles->links()}}
+        </div>
     </div>
 @endsection
