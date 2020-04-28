@@ -305,4 +305,52 @@ FIN DE CARD FLIP
     margin-top: 1px !important;
     padding-bottom: 1px !important;
 }
+.caption {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+}
 
+@media (max-width: 544px) {
+    .slider-text {font-size: 16px !important;}
+}
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 544px) {
+    .slider-text {font-size: 16px !important;}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .slider-text {font-size: 30px !important;}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .slider-text {
+        font-size: 32px !important;
+    }
+}
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        .slider-text {
+            font-size: 48px !important;
+        }
+    }
+footer a {
+    color: rgb(215, 215, 215);
+}
+footer a:hover {
+    color: #9e9e9e;
+}
+footer figcaption {
+    color: #9e9e9e !important;
+}
+footer hr {
+    background-color: rgb(215, 215, 215);
+}
+.h2 {
+    color: #1d8a20 !important;
+}
+footer span {
+    color: rgb(215, 215, 215);
+}

@@ -11,9 +11,17 @@
                 <div class="carousel-inner p-0 h-100">
                     <div class="carousel-item active  p-0 h-100">
                         <img class="w-100" src="img/coronavirus.png" alt="First slide">
+                        <div class="caption">
+                            <h1 class="slider-text text-secundary">CERRADO POR CORONAVIRUS</h1>
+                            <h1 class="slider-text mt-5 ml-4">#QUÉDATEENCASA</h1>
+                        </div>
                     </div>
                     <div class="carousel-item p-0">
-                        <a href="w-100"><img class="d-block w-100" src="img/coronavirus.png" alt="Second slide"></a>
+                        <a class="w-100"><img class="d-block w-100" src="img/coronavirus.png" alt="Second slide"></a>
+                        <div class="caption">
+                            <h1 class="slider-text text-secundary">CERRADO POR CORONAVIRUS</h1>
+                            <h1 class="slider-text mt-5 ml-4">#QUÉDATEENCASA</h1>
+                        </div>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -28,9 +36,8 @@
 
         </div>
     </section>
-    <hr>
-    <section class="row">
-        <div class="col text-center">
+    <section class="row mt-5">
+        <div class="col mt-5 text-center">
             <h3 class="font-weight-bold text-dark">ACTIVIDADES</h3>
             <h1>EMPIEZA A CONSEGUIR TUS OBJETIVOS</h1>
             <div class="row text-center">
@@ -91,15 +98,14 @@
             </div>
         </div>
     </section>
-    <hr>
-    <section class="row">
-        <div class="col-sm-7 text-justify  text-secondary border-right">
+    <section class="row mt-5 mb-5">
+        <div class="col-sm-7 mt-5 text-justify text-secondary">
             <h3 aria-hidden="true" class="font-weight-bold text-dark">SÍGUENOS EN NUESTRAS</h3>
             <h1>REDES SOCIALES</h1>
             <p class="text-dark">¿Quieres ser el primero en conocer todas las novedades, participar en nuestras actividades y disfrutar de las mejores ofertas?  ¡Pues dale a seguir y forma parte de la comunidad del PDM!</p>
         </div>
         <div class="col-sm-5 mt-5 text-center">
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-4 border-right">
                     <h2>Facebook</h2>
                     <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square fa-4x"></i></a><br>
@@ -115,5 +121,4 @@
             </div>
         </div>
     </section>
-    <hr>
 @endsection
