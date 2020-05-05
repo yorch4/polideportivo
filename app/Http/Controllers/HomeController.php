@@ -44,6 +44,14 @@ class HomeController extends Controller
         return view('main.subscribe');
     }
 
+    public function privacypolicy() {
+        return view('main.privacypolicy');
+    }
+
+    public function cookiespolicy() {
+        return view('main.cookiespolicy');
+    }
+
     public function profile() {
         $user = Auth::user();
         return view('main.profile', array('user' => $user));

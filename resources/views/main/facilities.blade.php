@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h1 class="text-center mt-3 text-uppercase">{{$facilitie->name}}</h1>
+            <h1 class="text-center my-5 text-uppercase">{{$facilitie->name}}</h1>
             <p>{{$facilitie->description}}</p>
             <h2 class="text-secundary">Horario</h2>
             <p>{{$facilitie->timetable}}</p>

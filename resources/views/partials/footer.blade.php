@@ -5,8 +5,8 @@
         <div class="col-sm-4 text-center mb-3">
             <h1 class="h2">Legal</h1>
             <ul class="list-unstyled">
-                <li><a class="ml-3" href="">Política de privacidad</a></li>
-                <li><a class="" href="">Política de cookies</a></li>
+                <li><a class="ml-3" href="{{url('/politica-de-privacidad')}}">Política de privacidad</a></li>
+                <li><a class="" href="{{url('/politica-de-cookies')}}">Política de cookies</a></li>
             </ul>
         </div>
         <div class="col-sm-4 text-center mb-3">
@@ -16,9 +16,9 @@
         <div class="col-sm-4 text-center mb-3">
             <h1 class="h2">PDM</h1>
             <ul class="list-unstyled">
-                <li><a href="">Noticias</a></li>
-                <li><a href="">Abónate</a></li>
-                <li><a href="">Reservas</a></li>
+                <li><a href="{{url('/noticias')}}">Noticias</a></li>
+                <li><a href="{{url('/abonate')}}">Abónate</a></li>
+                <li><a href="{{url('/reservas')}}">Reservas</a></li>
             </ul>
         </div>
     </div>
@@ -27,18 +27,18 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-8">
             <div class="row mb-4">
-                <div class="col-sm-2">
+                <div class="col-xl-2">
                     <h1 class="h2">Contacto</h1>
                 </div>
-                <div class="col-sm-10 text-left mt-2">
+                <div class="col-xl-10 text-left mt-2">
                     <span><i class="fas fa-mobile-alt mr-2"></i>(+34) 645 189 321</span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-xl-2">
                     <h1 class="h2">Horario</h1>
                 </div>
-                <div class="col-sm-10 text-left mt-2">
+                <div class="col-xl-10 text-left mt-2">
                     <span><i class="fas fa-clock mr-2"></i>De Lunes a Domingo de 09:00h a 18:30h</span>
                 </div>
             </div>

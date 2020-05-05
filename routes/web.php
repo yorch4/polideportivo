@@ -17,6 +17,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/instalaciones/{name}', 'HomeController@facilities');
 Route::get('noticias', 'HomeController@articles');
 Route::get('abonate', 'HomeController@subscribe');
+Route::get('politica-de-privacidad', 'HomeController@privacypolicy');
+Route::get('politica-de-cookies', 'HomeController@cookiespolicy');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');
