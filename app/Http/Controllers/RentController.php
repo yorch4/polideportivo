@@ -37,8 +37,9 @@ class RentController extends Controller
         $day = $request->input('day');
         $section = $request->input('section');
         $user_id = $request->input('user_id');
+        $email = User::find($user_id)->email;
         $data = array(
-            'email_address'=>'jorge.rg0074@gmail.com',
+            'email_address'=> $email,
             'cc'=>null,
             'subject'=>'Datos reserva',
         );

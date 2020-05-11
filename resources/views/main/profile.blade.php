@@ -28,7 +28,7 @@
         </div>
         <div class="col-sm-2"></div>
     </div>
-    <div class="row mb-4">
+    <div class="row my-5">
         <div class="col text-center">
             <section class="table-responsive">
                 <h1>HISTORIAL DE RESERVAS</h1>
