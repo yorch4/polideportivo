@@ -141,4 +141,34 @@ class RentController extends Controller
             }
         }
     }
+    public function cancel(Request $request) {
+        $rent = Rent::find($request->input('id'));
+        $data = array(
+            'email_address'=> $rent->user->email,
+            'cc'=>null,
+            'subject'=>'Reserva anulada',
+        );
+        $pdfData = array(
+            'user'=> $rent->user->name." ".$rent->user->last_name,
+            'price'=> $rent->field->price,
+            'day' => $rent->day,
+            'section' => $rent->section,
+            'field'=>$rent->field->game." Campo ".$rent->field->field_number,
+        );
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadview('mails.pdf', $pdfData);
+        Mail::send('mails.cancel', $data, function($message) use($data, $pdf) {
+            $message->from('jorge.rgdaw@gmail.com', 'Polideportivo');
+            $message->to($data['email_address']);
+            if($data['cc'] != null){
+                $message->cc($data['cc']);
+            }
+            $message->subject($data['subject']);
+            $message->attachData($pdf->output(), 'reserva-anulada.pdf', [
+                'mime' => 'application/pdf',
+            ]);
+        });
+        $rent->delete();
+        return view('rent.cancel');
+    }
 }

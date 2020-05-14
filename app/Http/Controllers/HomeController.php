@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Facilitie;
+use App\Field;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -33,6 +35,11 @@ class HomeController extends Controller
     public function facilities($name) {
         $facilitie = Facilitie::where('name', '=', $name)->first();
         return view('main.facilities', array('facilitie' => $facilitie));
+    }
+
+    public function fields($game) {
+        $fields = Field::where('game', '=', $game)->paginate(1);
+        return view('main.fields', array('fields' => $fields));
     }
 
     public function articles(Request $request) {
@@ -77,5 +84,27 @@ class HomeController extends Controller
         }
         $user->save();
         return redirect('/perfil');
+    }
+
+    public function contact() {
+        return view('main.contact');
+    }
+    public function postContact(Request $request) {
+        $data = array(
+            'email_address'=> Auth::user()->email,
+            'cc'=>null,
+            'subject'=>$request->input('subject'),
+            'body'=>$request->input('body'),
+        );
+        Mail::send([], $data, function($message) use($data) {
+            $message->from($data['email_address']);
+            $message->to('jorge.rgdaw@gmail.com');
+            if($data['cc'] != null){
+                $message->cc($data['cc']);
+            }
+            $message->setBody($data['body']);
+            $message->subject($data['subject']);
+        });
+        return redirect()->back() ->with('alert', 'El mensaje se ha enviado correctamente. Contactaremos contigo en breve.');
     }
 }

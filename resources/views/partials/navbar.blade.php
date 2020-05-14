@@ -27,6 +27,17 @@
                         @endforeach
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="collapsingNavbar"
+                       data-toggle="dropdown">
+                        CAMPOS
+                    </a>
+                    <ul class="dropdown-menu"  id="dropdownMenuButton">
+                        @foreach(\Illuminate\Support\Facades\DB::table('fields')->select('game')->groupBy('game')->get() as $field)
+                            <li><a class="dropdown-item" href="{{url("/campos/$field->game")}}">{{$field->game}}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/noticias')}}">NOTICIAS</a>
                 </li>

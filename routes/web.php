@@ -19,11 +19,14 @@ Route::get('noticias', 'HomeController@articles');
 Route::get('abonate', 'HomeController@subscribe');
 Route::get('politica-de-privacidad', 'HomeController@privacypolicy');
 Route::get('politica-de-cookies', 'HomeController@cookiespolicy');
+Route::get('/campos/{game}', 'HomeController@fields');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');
     Route::get('perfil/modificar', 'HomeController@profile');
     Route::post('perfil/confirmarModificar', 'HomeController@postUpdateProfile');
+    Route::get('contacto', 'HomeController@contact');
+    Route::post('contacto', 'HomeController@postContact');
 });
 
 //CONTROL
@@ -73,6 +76,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/reservas/{id}', 'RentController@sections');
     Route::post('/confirmar-reserva', 'RentController@confirm');
     Route::get('/confirmar-reserva', 'HomeController@index');
+    Route::post('/anular-reserva', 'RentController@cancel');
 });
 
 Auth::routes();

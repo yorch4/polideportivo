@@ -47,6 +47,15 @@
                         <td>{{$rent->day}}</td>
                         <td>{{$rent->section}}</td>
                         <td>{{$rent->field->game}} Campo {{$rent->field->field_number}}</td>
+                        @if($rent->day >= date('Y-m-d'))
+                        <td>
+                            <form action="{{url('/anular-reserva')}}" method="post">
+                                @csrf
+                                <input type="hidden" value="{{$rent->id}}" name="id">
+                                <input type="submit" value="Anular Reserva" class="btn btn-primary mt-3" onclick="return confirm('¿Estás seguro de anularla?')">
+                            </form>
+                        </td>
+                        @endif
                     </tr>
                     @endforeach
                     </tbody>
@@ -54,9 +63,6 @@
                @else
                     <h2>Aún no has hecho ninguna reserva</h2>
                 @endif
-
-
-
             </section>
         </div>
     </div>

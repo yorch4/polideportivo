@@ -31,7 +31,14 @@
                     <h1 class="h2">Contacto</h1>
                 </div>
                 <div class="col-xl-10 text-left mt-2">
-                    <span><i class="fas fa-mobile-alt mr-2"></i>(+34) 645 189 321</span>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <span><i class="far fa-envelope mr-2"></i><a href="{{url('/contacto')}}">Atención al cliente</a></span>
+                        </div>
+                        <div class="col-xl-3">
+                            <span><i class="fas fa-mobile-alt mr-2"></i>(+34) 645 189 321</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
