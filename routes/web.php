@@ -20,6 +20,9 @@ Route::get('abonate', 'HomeController@subscribe');
 Route::get('politica-de-privacidad', 'HomeController@privacypolicy');
 Route::get('politica-de-cookies', 'HomeController@cookiespolicy');
 Route::get('/campos/{game}', 'HomeController@fields');
+Route::post('/campos/{game}', 'HomeController@addRate');
+Route::post('/eliminar-valoracion', 'HomeController@deleteRate');
+Route::post('editar-valoracion', 'HomeController@updateRate');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');

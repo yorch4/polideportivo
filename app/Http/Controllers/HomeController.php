@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Facilitie;
 use App\Field;
+use App\Rate;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,31 @@ class HomeController extends Controller
     public function fields($game) {
         $fields = Field::where('game', '=', $game)->paginate(1);
         return view('main.fields', array('fields' => $fields));
+    }
+
+    public function addRate(Request $request) {
+        $comment = $request->input('comment');
+        $id = $request->input('id');
+        $rate = new Rate();
+        $rate->rate = $request['rate'];;
+        $rate->comment = $comment;
+        $rate->field_id = $id;
+        $rate->user_id = Auth::user()->id;
+        $rate->save();
+        return redirect()->back();
+    }
+
+    public function deleteRate(Request $request) {
+        Rate::find($request->input('id'))->delete();
+        return redirect()->back();
+    }
+
+    public function updateRate(Request $request) {
+        $rate = Rate::find($request->input('id'));
+        $rate->comment = $request->input('comment');
+        $rate->rate = $request['rate'];
+        $rate->save();
+        return redirect()->back();
     }
 
     public function articles(Request $request) {
