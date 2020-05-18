@@ -52,5 +52,10 @@
             </div>
         </div>
         @endforeach
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                {{$fields->links()}}
+            </div>
+        </div>
     </div>
 @endsection

@@ -122,7 +122,7 @@
                                                            @csrf
                                                            <div class="form__group field">
                                                                <img class="rounded-circle pt-4" style="width: 50px" src="{{url(base64_decode($rate->user->img))}}">
-                                                               <input type="input" class="form__field" placeholder="Edita tu comentario" name="comment" id='comment-edit' value="{{$rate->comment}}" required />
+                                                               <textarea name="comment" class="form__field" placeholder="Edita tu comentario" id="comment-edit" maxlength="230" style="resize: none" required>{{$rate->comment}}</textarea>
                                                                <label for="comment-edit" class="form__label mb-0">Edita tu comentario</label>
                                                                <div class="rating">
                                                                    <input type="radio" name="rate" id="rate1-edit" value="5" @if($rate->rate == 5) checked @endif><label for="rate1-edit"></label>
@@ -132,7 +132,7 @@
                                                                    <input type="radio" name="rate" id="rate5-edit" value="1" @if($rate->rate == 1) checked @endif><label for="rate5-edit"></label>
                                                                </div>
                                                                <input type="hidden" name="id" value="{{$rate->id}}">
-                                                               <div class="text-right mt-2 mb-5">
+                                                               <div class="text-right mt-5 mb-5">
                                                                    <input type="button" class="btn btn-sm btn-outline-dark" onclick="ocultar()" value="CANCELAR">
                                                                    <input type="submit" class="btn btn-secundary" value="Editar" style="position: absolute; left: 55%">
                                                                </div>
@@ -158,7 +158,7 @@
                                                                <span class="fas fa-star @if($rate->rate >= 4) checked @endif"></span>
                                                                <span class="fas fa-star @if($rate->rate >= 5) checked @endif"></span>
                                                                <span class="ml-3">{{date('d-m-Y', strtotime($rate->created_at))}}</span>
-                                                               <p>{{$rate->comment}}</p>
+                                                               <p class="h-auto" style="height:auto;word-wrap: break-word;">{{$rate->comment}}</p>
                                                            </div>
                                                        </div>
                                                        <div class="row">
@@ -184,7 +184,7 @@
                                                @csrf
                                                <div class="form__group field">
                                                    <img class="rounded-circle pt-4" style="width: 50px" src="{{url('/img/users/user.png')}}">
-                                                   <input type="input" class="form__field" placeholder="Añade un comentario público" name="comment" id='comment' required />
+                                                   <textarea name="comment" class="form__field" placeholder="Añade un comentario público" id="comment" maxlength="230" style="resize: none" required></textarea>
                                                    <label for="comment" class="form__label mb-0">Añade una valoración</label>
                                                    <div class="rating">
                                                        <input type="radio" name="rate" id="rate1" value="5"><label for="rate1"></label>
@@ -194,7 +194,7 @@
                                                        <input type="radio" name="rate" id="rate5" value="1"><label for="rate5"></label>
                                                    </div>
                                                    <input type="hidden" name="id" value="{{$field->id}}">
-                                                   <div class="text-right mt-2 mb-5">
+                                                   <div class="text-right mt-5 mb-5">
                                                        <input type="submit" class="btn btn-secundary" style="position: absolute; left: 55%">
                                                    </div>
                                                </div>
@@ -228,7 +228,7 @@
                                             <span class="fas fa-star @if($rate->rate >= 4) checked @endif"></span>
                                             <span class="fas fa-star @if($rate->rate >= 5) checked @endif"></span>
                                             <span class="ml-3">{{date('d-m-Y', strtotime($rate->created_at))}}</span>
-                                            <p>{{$rate->comment}}</p>
+                                            <p class="h-auto" style="height:auto;word-wrap: break-word;">{{$rate->comment}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +254,7 @@
                                             <span class="fas fa-star @if($rate->rate >= 4) checked @endif"></span>
                                             <span class="fas fa-star @if($rate->rate >= 5) checked @endif"></span>
                                             <span class="ml-3">{{date('d-m-Y', strtotime($rate->created_at))}}</span>
-                                            <p>{{$rate->comment}}</p>
+                                            <p class="h-auto" style="height:auto;word-wrap: break-word;">{{$rate->comment}}</p>
                                         </div>
                                     </div>
                                 </div>

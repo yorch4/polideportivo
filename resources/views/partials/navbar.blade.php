@@ -57,6 +57,7 @@
                             <li><a class="dropdown-item" href="{{url('/control/usuarios')}}">Usuarios</a></li>
                             <li><a class="dropdown-item" href="{{url('/control/campos')}}">Campos</a></li>
                             <li><a class="dropdown-item" href="{{url('/control/alquileres')}}">Alquileres</a></li>
+                            <li><a class="dropdown-item" href="{{url('/control/valoraciones')}}">Valoraciones</a></li>
                             <li><a class="dropdown-item" href="{{url('/control/instalaciones')}}">Instalaciones</a></li>
                             <li><a class="dropdown-item" href="{{url('/control/noticias')}}">Noticias</a></li>
                         </ul>

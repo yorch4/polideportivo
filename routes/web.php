@@ -70,6 +70,13 @@ Route::group(['middleware' => 'admin'], function() {
     Route::post('/control/noticias/eliminar', 'AdminController@deleteArticle');
     Route::get('/control/noticias/modificar/{id}', 'AdminController@updateArticle');
     Route::post('/control/noticias/modificar/{id}', 'AdminController@postUpdateArticle');
+
+    Route::get('/control/valoraciones', 'AdminController@rates');
+    Route::get('/control/valoraciones/anadir', 'AdminController@addRate');
+    Route::post('/control/valoraciones/anadir', 'AdminController@postAddRate');
+    Route::post('/control/valoraciones/eliminar', 'AdminController@deleteRate');
+    Route::get('/control/valoraciones/modificar/{id}', 'AdminController@updateRate');
+    Route::post('/control/valoraciones/modificar/{id}', 'AdminController@postUpdateRate');
 });
 
 //RESERVAS

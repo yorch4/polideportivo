@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Facilitie;
 use App\Field;
+use App\Rate;
 use App\Rent;
 use App\Section;
 use App\User;
@@ -71,7 +72,7 @@ class AdminController extends Controller
     }
 
     public function fields(Request $request) {
-        $fields = Field::game($request->get('juego'))->get();
+        $fields = Field::game($request->get('juego'))->paginate(5);
         return view('control.fields.fields', array('fields' => $fields));
     }
     public function addField() {
@@ -139,7 +140,7 @@ class AdminController extends Controller
     }
 
     public function facilities(Request $request) {
-        $facilities = Facilitie::name($request->get('nombre'))->get();
+        $facilities = Facilitie::name($request->get('nombre'))->paginate(5);
         return view('control.facilities.facilities', array('facilities' => $facilities));
     }
     public function addFacility() {
@@ -295,6 +296,63 @@ class AdminController extends Controller
             $article->created_at = $request->input('created_at');
             $article->save();
             return redirect('/control/noticias');
+        }
+    }
+
+    public function rates(Request $request) {
+        $rates = Rate::email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(5);
+        return view('control.rates.rates', array('rates' => $rates));
+    }
+    public function addRate() {
+        return view('control.rates.addRate', array('fields' => Field::all()));
+    }
+    public function postAddRate(Request $request) {
+        if(count(DB::table('users')->where('email', '=', $request->input('email'))->get()) <= 0) {
+            return Redirect::back()->withInput()->withErrors(['Ese email no existe']);
+        } else {
+            $user = User::where('email', $request->input('email'))->first();
+            if(count(DB::table('rents')->where('user_id', '=', $user->id)->where('field_id', '=', $request->input('field_id'))->get()) <= 0) {
+                return Redirect::back()->withInput()->withErrors(['El usuario aún no ha reservado ese campo, por lo que no puede valorarlo']);
+            } else {
+                $error = DB::table('rates')->where('user_id', '=', $user->id)->where('field_id', '=', $request->input('field_id'))->get();
+                if(count($error) > 0) {
+                    return redirect()->back()->withInput()->withErrors('Ese usuario ya ha valorado ese campo.');
+                } else {
+                    $rate = new Rate();
+                    $rate->user_id = $user->id;
+                    $rate->field_id = $request->input('field_id');
+                    $rate->comment = $request->input('comment');
+                    $rate->rate = $request->input('rate');
+                    $rate->save();
+                    return redirect('/control/valoraciones');
+                }
+            }
+        }
+    }
+    public function deleteRate(Request $request) {
+        Rate::find($request->input('id'))->delete();
+        return redirect('/control/valoraciones');
+    }
+    public function updateRate($id) {
+        return view('control.rates.updateRate', array('rate' => Rate::find($id), 'fields' => Field::all()));
+    }
+    public function postUpdateRate($id , Request $request)
+    {
+        if (count(DB::table('users')->where('email', '=', $request->input('email'))->get()) <= 0) {
+            return Redirect::back()->withInput()->withErrors(['Ese email no existe']);
+        } else {
+            $user = User::where('email', $request->input('email'))->first();
+            if (count(DB::table('rents')->where('user_id', '=', $user->id)->where('field_id', '=', $request->input('field_id'))->get()) <= 0) {
+                return Redirect::back()->withInput()->withErrors(['El usuario aún no ha reservado ese campo, por lo que no puede valorarlo']);
+            } else {
+                $rate = Rate::find($id);
+                $rate->user_id = $user->id;
+                $rate->field_id = $request->input('field_id');
+                $rate->comment = $request->input('comment');
+                $rate->rate = $request->input('rate');
+                $rate->save();
+                return redirect('/control/valoraciones');
+            }
         }
     }
 }

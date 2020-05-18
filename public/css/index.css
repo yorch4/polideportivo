@@ -378,7 +378,7 @@ footer span {
 .rating label:before {
     content: '\f005';
     font-family: 'Font Awesome 5 Free';
-    position: relative;
+    position: absolute;
     display: block;
 }
 .rating label:after {
