@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Mail;
 
 class RentController extends Controller
 {
-    public function index() {
-        return view('rent.rent', array('fields' => Field::orderBy('game', 'asc')->get()));
+    public function index(Request $request) {
+        return view('rent.rent', array('fields' => Field::game($request->get('juego'))->orderBy('game', 'asc')->get(), 'searchFields' => Field::select('game')->distinct()->get()));
     }
     public function calendar($id) {
         return view('rent.calendar', array('field' => Field::find($id)));

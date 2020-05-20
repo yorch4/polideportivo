@@ -1,5 +1,18 @@
 @extends('layouts.master')
 @section('content')
+    <nav class="navbar navbar-light mt-3">
+        <div class="w-100">
+            <form class="form-inline float-right">
+                <select name="juego" class="form-control mr-sm-2" aria-label="Search">
+                    <option value="" selected>Todos</option>
+                    @foreach($searchFields as $searchField)
+                        <option value="{{$searchField->game}}">{{$searchField->game}}</option>
+                    @endforeach
+                </select>
+                <button class="btn btn-secundary my-2 my-sm-0" type="submit">Filtrar</button>
+            </form>
+        </div>
+    </nav>
     <div class="row mb-4">
     @foreach($fields as $field)
           <div class="col-sm-6 col-article mx-auto">
