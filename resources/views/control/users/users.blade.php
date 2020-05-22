@@ -9,13 +9,15 @@
             </form>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row mb-2">
             <div class="col-sm-3">
                 <a class="btn btn-primary" href="{{url('/control/usuarios/anadir')}}">Añadir usuario</a>
             </div>
         </div>
+        <div class="row">
         @foreach($users as $user)
+            <div class="col-xl-6">
         <div class="row">
             <div class="col-md-3">
                 <div class="text-center">
@@ -61,7 +63,9 @@
                 </div>
             </div>
         </div>
+            </div>
         @endforeach
+        </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
                 {{$users->links()}}

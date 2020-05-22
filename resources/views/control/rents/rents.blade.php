@@ -10,7 +10,7 @@
             </form>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row mb-2">
             <div class="col-md-2"></div>
             <div class="col-md-8">
@@ -18,7 +18,9 @@
             </div>
             <div class="col-md-2"></div>
         </div>
+        <div class="row">
         @foreach($rents as $rent)
+            <div class="col-xl-6">
             <div class="row">
                 <div class="col-md-2">
                 </div>
@@ -50,7 +52,9 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+            </div>
         @endforeach
+        </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
                 {{$rents->links()}}

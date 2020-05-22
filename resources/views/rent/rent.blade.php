@@ -28,6 +28,17 @@
                           <div class="tab-content">
                               <h1 class="h3">{{$field->game}} Campo {{$field->field_number}}</h1>
                               <p class="m-0"><i class="fas fa-euro-sign mr-2"></i>{{$field->price}}</p>
+                              <p class="m-0"><i class="fas fa-star mr-2"></i>
+                              @if(\App\Rate::where('field_id', $field->id)->count() <= 0)
+                                      Aún no se han hecho valoraciones de este campo
+                              @else
+                                  <?php
+                                  $valoraciones = \App\Rate::where('field_id', $field->id)->count();
+                                  $media =  (\App\Rate::where('field_id', $field->id)->sum('rate') / $valoraciones);
+                                  ?>
+                                  {{$media}}
+                                  @endif
+                              </p>
                           </div>
                       </div>
                   </div>

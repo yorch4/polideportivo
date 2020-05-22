@@ -17,7 +17,9 @@
             </div>
             <div class="col-md-2"></div>
         </div>
+        <div class="row">
         @foreach($rates as $rate)
+            <div class="col-xl-6">
             <div class="row">
                 <div class="col-md-2">
                 </div>
@@ -50,7 +52,9 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+            </div>
         @endforeach
+        </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
                 {{$rates->links()}}

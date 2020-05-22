@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 class AdminController extends Controller
 {
     public function users(Request $request) {
-        $users = User::lastname($request->get('apellidos'))->email($request->get('email'))->paginate(5);
+        $users = User::lastname($request->get('apellidos'))->email($request->get('email'))->paginate(4);
 
         return view('control.users.users', array('users' => $users));
     }
@@ -72,8 +72,8 @@ class AdminController extends Controller
     }
 
     public function fields(Request $request) {
-        $fields = Field::game($request->get('juego'))->paginate(5);
-        return view('control.fields.fields', array('fields' => $fields));
+        $fields = Field::game($request->get('juego'))->paginate(4);
+        return view('control.fields.fields', array('fields' => $fields, 'searchFields' => Field::select('game')->distinct()->get()));
     }
     public function addField() {
         return view('control.fields.addField');
@@ -140,7 +140,7 @@ class AdminController extends Controller
     }
 
     public function facilities(Request $request) {
-        $facilities = Facilitie::name($request->get('nombre'))->paginate(5);
+        $facilities = Facilitie::name($request->get('nombre'))->paginate(4);
         return view('control.facilities.facilities', array('facilities' => $facilities));
     }
     public function addFacility() {
@@ -183,7 +183,7 @@ class AdminController extends Controller
     }
 
     public function rents(Request $request) {
-        $rents = Rent::day($request->get('fecha'))->email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(5);
+        $rents = Rent::day($request->get('fecha'))->email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(4);
         return view('control.rents.rents', array('rents' => $rents));
     }
     public function addRent() {
@@ -300,7 +300,7 @@ class AdminController extends Controller
     }
 
     public function rates(Request $request) {
-        $rates = Rate::email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(5);
+        $rates = Rate::email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(4);
         return view('control.rates.rates', array('rates' => $rates));
     }
     public function addRate() {
