@@ -33,7 +33,7 @@
                 <div class="tab-content">
                     <hr>
                     <h1>{{$field->game}} Campo {{$field->field_number}}</h1>
-                    <p class="m-0"><i class="fas fa-dollar-sign mr-2"></i>{{$field->price}}</p>
+                    <p class="m-0"><i class="fas fa-euro-sign mr-2"></i>{{$field->price}}</p>
                     <?php $i = 1 ?>
                     @foreach($field->sections as $section)
                         <p class="m-0"><i class="mr-2">{{$i}}</i>{{$section->section}}</p>

@@ -28,13 +28,10 @@
         <div class="col-sm-8">
             <div class="row mb-4">
                 <div class="col-xl-2">
-                    <h1 class="h2">Contacto</h1>
+                    <a class="h2" href="{{url('/contacto')}}">Contacto</a>
                 </div>
                 <div class="col-xl-10 text-left mt-2">
                     <div class="row">
-                        <div class="col-xl-3">
-                            <span><i class="far fa-envelope mr-2"></i><a href="{{url('/contacto')}}">Atención al cliente</a></span>
-                        </div>
                         <div class="col-xl-3">
                             <span><i class="fas fa-mobile-alt mr-2"></i>(+34) 645 189 321</span>
                         </div>

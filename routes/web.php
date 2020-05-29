@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Auth::routes(['verify' => true]);
+
 Route::get('/index', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/instalaciones/{name}', 'HomeController@facilities');
@@ -23,13 +26,14 @@ Route::get('/campos/{game}', 'HomeController@fields');
 Route::post('/campos/{game}', 'HomeController@addRate');
 Route::post('/eliminar-valoracion', 'HomeController@deleteRate');
 Route::post('editar-valoracion', 'HomeController@updateRate');
-Route::group(['middleware' => 'auth'], function() {
+Route::get('contacto', 'HomeController@contact');
+Route::post('contacto', 'HomeController@postContact');
+
+Route::group(['middleware' => 'verified'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');
     Route::get('perfil/modificar', 'HomeController@profile');
     Route::post('perfil/confirmarModificar', 'HomeController@postUpdateProfile');
-    Route::get('contacto', 'HomeController@contact');
-    Route::post('contacto', 'HomeController@postContact');
 });
 
 //CONTROL
@@ -63,6 +67,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::post('/control/alquileres/modificar/{id}', 'AdminController@confirmUpdateRent');
     Route::post('/control/alquileres/modificar-siguiente', 'AdminController@nextUpdateRent');
     Route::post('/control/alquileres/modificar-siguiente/hora', 'AdminController@postNextUpdateRent');
+    Route::post('control/alquileres/pdf', 'AdminController@pdf');
 
     Route::get('/control/noticias', 'AdminController@articles');
     Route::get('/control/noticias/anadir', 'AdminController@addArticle');
@@ -80,7 +85,7 @@ Route::group(['middleware' => 'admin'], function() {
 });
 
 //RESERVAS
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'verified'], function() {
     Route::get('/reservas', 'RentController@index');
     Route::get('/reservas/{id}', 'RentController@calendar');
     Route::post('/reservas/{id}', 'RentController@sections');
@@ -89,5 +94,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/anular-reserva', 'RentController@cancel');
 });
 
-Auth::routes();
 

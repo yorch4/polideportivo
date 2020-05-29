@@ -47,6 +47,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/reservas')}}">RESERVAS</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/contacto')}}">CONTACTO</a>
+                </li>
                 @if(Auth::check() && \Illuminate\Support\Facades\Auth::user()->role == 'admin')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="collapsingNavbar"

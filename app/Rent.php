@@ -13,9 +13,13 @@ class Rent extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeDay($query, $day) {
-        if($day) {
-            return $query->where('day', 'like', "%$day%");
+    public function scopeDay($query, $day1, $day2) {
+        if($day1 && $day2) {
+            return $query->where('day', '>=', "$day1")->where('day', '<=', "$day2");
+        } else {
+            if($day1) {
+                return $query->where('day', '=', "$day1");
+            }
         }
     }
     public function scopeEmail($query, $email) {

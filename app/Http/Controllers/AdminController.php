@@ -183,9 +183,20 @@ class AdminController extends Controller
     }
 
     public function rents(Request $request) {
-        $rents = Rent::day($request->get('fecha'))->email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(4);
-        return view('control.rents.rents', array('rents' => $rents));
+        $rents = Rent::day($request->get('fecha1'), $request->get('fecha2'))->email($request->get('email'))->game($request->get('juego'))->orderBy('id', 'DESC')->paginate(4);
+        return view('control.rents.rents', array('rents' => $rents, 'fecha1' => $request->get('fecha1'), 'fecha2' => $request->get('fecha2'), 'email' => $request->get('email'), 'juego' => $request->get('juego')));
     }
+
+    public function pdf(Request $request) {
+        $rents =  Rent::day($request->get('fecha1'), $request->get('fecha2'))->email($request->get('email'))->game($request->get('juego'))->get();
+        $pdfData = array(
+            'rents'=> $rents
+        );
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadview('pdf.pdfRents', $pdfData);
+        return $pdf->download('alquileres.pdf');
+    }
+
     public function addRent() {
         return view('control.rents.addRent', array('fields' => Field::all()));
     }

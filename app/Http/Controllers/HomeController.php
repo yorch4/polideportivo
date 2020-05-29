@@ -117,13 +117,12 @@ class HomeController extends Controller
     }
     public function postContact(Request $request) {
         $data = array(
-            'email_address'=> Auth::user()->email,
             'cc'=>null,
             'subject'=>$request->input('subject'),
-            'body'=>$request->input('body'),
+            'body'=>"(De: ".$request->input('email').") ".$request->input('body'),
         );
         Mail::send([], $data, function($message) use($data) {
-            $message->from($data['email_address']);
+            $message->from('jorge.rgdaw@gmail.com');
             $message->to('jorge.rgdaw@gmail.com');
             if($data['cc'] != null){
                 $message->cc($data['cc']);
