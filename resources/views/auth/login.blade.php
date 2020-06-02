@@ -7,6 +7,13 @@
         <div class="card-body mt-3">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
+                <div class="flash-message">
+                    @foreach(['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-'.$msg))
+                            <p class="alert alert-{{$msg}}">{{Session::get('alert-'.$msg)}} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> </p>
+                        @endif
+                    @endforeach
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>

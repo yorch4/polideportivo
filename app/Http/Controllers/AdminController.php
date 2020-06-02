@@ -37,7 +37,16 @@ class AdminController extends Controller
         } else {
          $img = "img/users/user.png";
         }
-        User::create(array('name' => $request->input('name'), 'last_name' => $request->input('last_name'), 'email' => $request->input('email'), 'password' => Hash::make($request->input('password')), 'role' => $request->input('role'), 'img' => base64_encode($img)));
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role = $request->input('role');
+        $user->is_verified = 1;
+        $user->img = base64_encode($img);
+        $user->save();
+
         return redirect('/control/usuarios');
     }
     public function deleteUser(Request $request) {
@@ -62,10 +71,10 @@ class AdminController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
         $user->role = $request->input('role');
-        if($request->input('email_verified_at') == 1) {
-            $user->email_verified_at = time();
+        if($request->input('is_verified') == 1) {
+            $user->is_verified = 1;
         } else {
-            $user->email_verified_at = NULL;
+            $user->is_verified = 0;
         }
         $user->save();
         return redirect('/control/usuarios');

@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" name="email_verified_at" value="1" type="checkbox" @if($user->email_verified_at != NULL) checked @endif id="emailVerificado">
+                    <input class="form-check-input" name="is_verified" value="1" type="checkbox" @if($user->is_verified == 1) checked @endif id="emailVerificado">
                     <label class="form-check-label" for="emailVerificado">
                         Email verificado
                     </label>

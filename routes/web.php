@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
+Auth::routes(['auth' => true]);
 
 Route::get('/index', 'HomeController@index');
 Route::get('/', 'HomeController@index');
@@ -28,8 +28,9 @@ Route::post('/eliminar-valoracion', 'HomeController@deleteRate');
 Route::post('editar-valoracion', 'HomeController@updateRate');
 Route::get('contacto', 'HomeController@contact');
 Route::post('contacto', 'HomeController@postContact');
+Route::get('/verify/{code}', 'Auth\RegisterController@verifyUser');
 
-Route::group(['middleware' => 'verified'], function() {
+Route::group(['middleware' => 'auth'], function() {
     Route::get('perfil', 'HomeController@profile');
     Route::post('perfil/modificar', 'HomeController@updateProfile');
     Route::get('perfil/modificar', 'HomeController@profile');
@@ -85,7 +86,7 @@ Route::group(['middleware' => 'admin'], function() {
 });
 
 //RESERVAS
-Route::group(['middleware' => 'verified'], function() {
+Route::group(['middleware' => 'auth'], function() {
     Route::get('/reservas', 'RentController@index');
     Route::get('/reservas/{id}', 'RentController@calendar');
     Route::post('/reservas/{id}', 'RentController@sections');

@@ -33,10 +33,10 @@
                     <p class="m-0"><i class="fas fa-user mr-2"></i>{{$user->last_name}}</p>
                     <p class="m-0"><i class="fas fa-calendar-alt mr-2"></i>{{$user->created_at}}</p>
                     <p class="m-0"><i class="fas fa-user-check mr-2"></i>
-                    @if($user->email_verified_at == NULL)
+                    @if($user->is_verified == 0)
                             <i class="fas fa-times"></i>
                     @else
-                        {{$user->email_verified_at}}
+                            <i class="fas fa-check"></i>
                     @endif
                     </p>
                     <p class="m-0"><i class="fas fa-user-tag mr-2"></i>{{$user->role}}</p>

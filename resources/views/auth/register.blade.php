@@ -7,6 +7,13 @@
         <div class="card-body mt-3">
             <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
                 @csrf
+                <div class="flash-message">
+                    @foreach(['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-'.$msg))
+                            <p class="alert alert-{{$msg}}">{{Session::get('alert-'.$msg)}} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> </p>
+                        @endif
+                    @endforeach
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -61,7 +68,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="password">Contraseña</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" maxlength="60" required autocomplete="new-password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" minlength="8" name="password" maxlength="60" required autocomplete="new-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -74,7 +81,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="password-confirm">Repite Contraseña</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" maxlength="60" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" minlength="8" maxlength="60" required autocomplete="new-password">
                         </div>
                     </div>
                 </div>
