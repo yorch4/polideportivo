@@ -47,7 +47,7 @@
                         <td>{{$rent->day}}</td>
                         <td>{{$rent->section}}</td>
                         <td>{{$rent->field->game}} Campo {{$rent->field->field_number}}</td>
-                        @if($rent->day >= date('Y-m-d'))
+                        @if($rent->day >= date('Y-m-d') && strtotime(substr($rent->section, 0, -6)) - 7000 > time())
                         <td>
                             <form action="{{url('/anular-reserva')}}" method="post">
                                 @csrf

@@ -188,7 +188,7 @@ class AdminController extends Controller
     }
 
     public function pdf(Request $request) {
-        $rents =  Rent::day($request->get('fecha1'), $request->get('fecha2'))->email($request->get('email'))->game($request->get('juego'))->get();
+        $rents =  Rent::day($request->get('fecha1'), $request->get('fecha2'))->email($request->get('email'))->game($request->get('juego'))->orderBy('day', 'DESC')->get();
         $pdfData = array(
             'rents'=> $rents
         );

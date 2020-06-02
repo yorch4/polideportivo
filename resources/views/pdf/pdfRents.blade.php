@@ -5,7 +5,25 @@
 <link rel="stylesheet" type="text/css" href="{{public_path('css/index.css')}}"/>
 <div class="container-fluid">
     <img class="img-fluid" src="{{public_path('img/Logo.PNG')}}">
-    @foreach($rents as $rent)
-        {{$rent->id}}<br>
-    @endforeach
+    <h1>Reservas de Campos</h1>
+    <table class="table table-hover mt-5">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Campo</th>
+            <th>Día</th>
+            <th>Hora</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach($rents as $rent)
+                <tr>
+                    <td>{{$rent->user->email}}</td>
+                    <td>{{$rent->field->game}} Campo {{$rent->field->field_number}}</td>
+                    <td>{{$rent->day}}</td>
+                    <td>{{$rent->section}}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
